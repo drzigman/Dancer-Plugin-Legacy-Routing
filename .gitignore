@@ -1,0 +1,5 @@
+*.swp
+*.tar.gz
+*.bak
+Dancer-Plugin-Legacy*
+.build*
