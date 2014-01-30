@@ -5,25 +5,38 @@ use warnings;
 
 use Data::Dumper;
 use Test::Most;
-use Test::WWW::Mechanize::PSGI;
 
-use Dancer qw(:syntax);
-use Cwd;
+use FindBin;
+use lib "$FindBin::Bin/../bin/";
 
-set apphandler => "PSGI";
-
-my $mech = Test::WWW::Mechanize::PSGI->new( app => do( getcwd() . "/script/test_dancer_app.pl" ) );
+use TestDancerPluginLegacyRouting;
+use Dancer::Test;
 
 subtest "Ensure legacy_get directs to correct controller" => sub {
-    $mech->get_ok("/legacy/get");
+    route_exists        [ GET => '/legacy/get' ], "GET /legacy/get is handled";
+    response_content_is [ GET => '/legacy/get' ], "Testing Get",
+      "got expected response content for /legacy/get";
 
-    cmp_ok($mech->content, "eq", "Testing Get", "Correct Content");
-    cmp_ok($mech->status, '==', 200, "Returns 200");
+    route_exists        [ GET => '/good/get' ], "GET /good/get is handled";
+    response_content_is [ GET => '/good/get' ], "Testing Get",
+      "got expected response content for /good/get";
+};
 
-    my $updated_response = $mech->get_ok("/good/get");
+subtest "Legacy Route Called Logged when Logging Enabled" => sub {
+    route_exists [ GET => '/legacy/get' ], "GET /legacy/get is handled";
+    is_deeply( read_logs,
+        [
+            {
+                level => 'info',
+                message =>
+                  "Legacy Route GET '/legacy/get' referred from '(none)'"
+            }
+        ],
+        "Logged Call to Legacy Route"
+    );
 
-    cmp_ok($mech->content, "eq", "Testing Get", "Correct Content");
-    cmp_ok($mech->status, '==', 200, "Returns 200");
+    route_exists [ GET => '/good/get' ], "GET /good/get is handled";
+    is_deeply( read_logs, [], "No Additional Log Entries Generated" );
 };
 
 done_testing;

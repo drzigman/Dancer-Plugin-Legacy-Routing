@@ -3,18 +3,22 @@ package Dancer::Plugin::Legacy::Routing;
 use strict;
 use warnings;
 
-use Dancer ':syntax';
+use Dancer qw(:syntax);
 use Dancer::Plugin;
 
-set 'show_errors'  => 1;
+use Data::Dumper;
+register legacy_get => sub {
+    my $pattern = shift;
+    my $code    = shift;
 
-register legacy_get    => sub {
-    my ($self, @args) = plugin_args(@_);
-#    my $conf          = plugin_setting();
+    my $conf = plugin_setting();
 
-#    $conf->{log} and _generate_log_entry();
+    my $hooked_code = sub {
+        $conf->{log} and log_request();
+        &$code();
+    };
 
-    get @args;
+    get $pattern, $hooked_code;
 };
 
 #register legacy_post   => sub {
@@ -23,10 +27,14 @@ register legacy_get    => sub {
 #register legacy_head   => sub {
 #register legacy_patch  => sub {
 
-sub _generate_log_entry {
-    info "Legacy Route " . request->method . " '" . request->uri
-        . "' called by '" . request->address . "' referred from '"
-        . request->referer . "'";
+sub log_request {
+    info "Legacy Route "
+      . request->method . " '"
+      . request->path
+      . "' referred from '"
+      . ( defined request->referer ? request->referer : "(none)" ) . "'";
+
+    return;
 }
 
 register_plugin;
