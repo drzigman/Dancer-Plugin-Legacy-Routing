@@ -202,3 +202,21 @@ sub log_request {
 
 register_plugin;
 1;
+
+__END__
+
+=pod
+
+=head1 AUTHORS
+
+Robert Stone C<< <drzigman AT cpan DOT org > >>
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2014 Robert Stone
+
+This program is free software; you can redistribute it and/or modify it under the terms of either: the GNU Lesser General Public License as published by the Free Software Foundation; or any compatible license.
+
+See http://dev.perl.org/licenses/ for more information.
+
+=cut
