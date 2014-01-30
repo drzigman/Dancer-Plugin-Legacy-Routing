@@ -21,7 +21,7 @@ register legacy_get => sub {
     get $pattern, $hooked_code;
 };
 
-register legacy_post   => sub {
+register legacy_post => sub {
     my $pattern = shift;
     my $code    = shift;
 
@@ -35,7 +35,7 @@ register legacy_post   => sub {
     post $pattern, $hooked_code;
 };
 
-register legacy_put    => sub {
+register legacy_put => sub {
     my $pattern = shift;
     my $code    = shift;
 
@@ -62,9 +62,6 @@ register legacy_del => sub {
 
     del $pattern, $hooked_code;
 };
-
-#register legacy_head   => sub {
-#register legacy_patch  => sub {
 
 sub log_request {
     info "Legacy Route "
