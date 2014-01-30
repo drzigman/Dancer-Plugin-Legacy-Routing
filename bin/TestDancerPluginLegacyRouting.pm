@@ -97,4 +97,34 @@ sub test_put_with_params {
         . " Var2 Value is = " . $var2;
 }
 
+del        "/good/delete"   => \&test_del;
+legacy_del "/legacy/delete" => \&test_del;
+
+del        "/good/delete/:var"   => \&test_del_with_var;
+legacy_del "/legacy/delete/:var" => \&test_del_with_var;
+
+del        "/good/delete/:var/params"   => \&test_del_with_params;
+legacy_del "/legacy/delete/:var/params" => \&test_del_with_params;
+
+sub test_del {
+    status 200;
+    return "Testing Delete";
+}
+
+sub test_del_with_var {
+    my $var = params->{'var'};
+
+    status 200;
+    return "Testing Delete, Var Value is = " . $var;
+}
+
+sub test_del_with_params {
+    my $var1 = params->{'var1'};
+    my $var2 = params->{'var2'};
+
+    status 200;
+    return "Testing Delete, Var1 Value is = " . $var1
+        . " Var2 Value is = " . $var2;
+}
+
 1;
