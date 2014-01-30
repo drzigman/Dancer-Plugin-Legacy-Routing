@@ -6,6 +6,9 @@ use warnings;
 use Dancer;
 use Dancer::Plugin::Legacy::Routing;
 
+# VERSION
+# ABSTRACT: Dancer App used for Testing of Dancer::PLugin::Legacy::Routing
+
 get "/good/get"          => \&test_get;
 legacy_get "/legacy/get" => \&test_get;
 
