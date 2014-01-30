@@ -67,4 +67,34 @@ sub test_post_with_params {
         . " Var2 Value is = " . $var2;
 }
 
+put        "/good/put"   => \&test_put;
+legacy_put "/legacy/put" => \&test_put;
+
+put        "/good/put/:var"   => \&test_put_with_var;
+legacy_put "/legacy/put/:var" => \&test_put_with_var;
+
+put        "/good/put/:var/params"   => \&test_put_with_params;
+legacy_put "/legacy/put/:var/params" => \&test_put_with_params;
+
+sub test_put {
+    status 200;
+    return "Testing Put";
+}
+
+sub test_put_with_var {
+    my $var = params->{'var'};
+
+    status 200;
+    return "Testing Put, Var Value is = " . $var;
+}
+
+sub test_put_with_params {
+    my $var1 = params->{'var1'};
+    my $var2 = params->{'var2'};
+
+    status 200;
+    return "Testing Put, Var1 Value is = " . $var1
+        . " Var2 Value is = " . $var2;
+}
+
 1;
