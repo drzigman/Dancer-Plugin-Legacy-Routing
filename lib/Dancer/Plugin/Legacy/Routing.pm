@@ -21,7 +21,20 @@ register legacy_get => sub {
     get $pattern, $hooked_code;
 };
 
-#register legacy_post   => sub {
+register legacy_post   => sub {
+    my $pattern = shift;
+    my $code    = shift;
+
+    my $conf = plugin_setting();
+
+    my $hooked_code = sub {
+        $conf->{log} and log_request();
+        &$code();
+    };
+
+    post $pattern, $hooked_code;
+};
+
 #register legacy_put    => sub {
 #register legacy_delete => sub {
 #register legacy_head   => sub {

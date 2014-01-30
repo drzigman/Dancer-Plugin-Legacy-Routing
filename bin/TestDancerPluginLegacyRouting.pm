@@ -36,4 +36,35 @@ sub test_get_with_params {
     return "Testing Get, Var1 Value is = " . $var1
         . " Var2 Value is = " . $var2;
 }
+
+post        "/good/post"   => \&test_post;
+legacy_post "/legacy/post" => \&test_post;
+
+post        "/good/post/:var"   => \&test_post_with_var;
+legacy_post "/legacy/post/:var" => \&test_post_with_var;
+
+post        "/good/post/:var/params"   => \&test_post_with_params;
+legacy_post "/legacy/post/:var/params" => \&test_post_with_params;
+
+sub test_post {
+    status 200;
+    return "Testing Post";
+}
+
+sub test_post_with_var {
+    my $var = params->{'var'};
+
+    status 200;
+    return "Testing Post, Var Value is = " . $var;
+}
+
+sub test_post_with_params {
+    my $var1 = params->{'var1'};
+    my $var2 = params->{'var2'};
+
+    status 200;
+    return "Testing Post, Var1 Value is = " . $var1
+        . " Var2 Value is = " . $var2;
+}
+
 1;
