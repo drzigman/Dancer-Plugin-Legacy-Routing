@@ -6,7 +6,6 @@ use warnings;
 use Dancer qw(:syntax);
 use Dancer::Plugin;
 
-use Data::Dumper;
 register legacy_get => sub {
     my $pattern = shift;
     my $code    = shift;
