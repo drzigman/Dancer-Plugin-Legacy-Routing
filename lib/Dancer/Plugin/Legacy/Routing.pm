@@ -102,7 +102,7 @@ register legacy_get => sub {
     my $conf = plugin_setting();
 
     my $hooked_code = sub {
-        $conf->{log} and log_request();
+        $conf->{log} and _log_request();
         &$code();
     };
 
@@ -129,7 +129,7 @@ register legacy_post => sub {
     my $conf = plugin_setting();
 
     my $hooked_code = sub {
-        $conf->{log} and log_request();
+        $conf->{log} and _log_request();
         &$code();
     };
 
@@ -156,7 +156,7 @@ register legacy_put => sub {
     my $conf = plugin_setting();
 
     my $hooked_code = sub {
-        $conf->{log} and log_request();
+        $conf->{log} and _log_request();
         &$code();
     };
 
@@ -183,14 +183,14 @@ register legacy_del => sub {
     my $conf = plugin_setting();
 
     my $hooked_code = sub {
-        $conf->{log} and log_request();
+        $conf->{log} and _log_request();
         &$code();
     };
 
     del $pattern, $hooked_code;
 };
 
-sub log_request {
+sub _log_request {
     info "Legacy Route "
       . request->method . " '"
       . request->path

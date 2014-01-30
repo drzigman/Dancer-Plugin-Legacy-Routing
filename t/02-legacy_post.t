@@ -7,9 +7,8 @@ use Data::Dumper;
 use Test::Most;
 
 use FindBin;
-use lib "$FindBin::Bin/../bin/";
+require "$FindBin::Bin/../bin/TestDancerPluginLegacyRouting.pm";
 
-use TestDancerPluginLegacyRouting;
 use Dancer::Test;
 use Dancer::Config;
 

@@ -1,0 +1,4 @@
+{{$NEXT}}
+    - Initial Implementation
+    - Supports legacy_get, legacy_post, legacy_put, and legacy_delete
+    - Supports Logging
