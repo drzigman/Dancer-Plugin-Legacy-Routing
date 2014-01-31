@@ -1,9 +1,11 @@
 {{$NEXT}}
+    - Added YAML to dist.ini testing prereq since it is needed by Dancer to read the configuration file
+    - Added POD coverage testing (by re-enabling it)
 
 0.0.2     2014-01-30 19:32:50-06:00 America/Chicago
     - Moved TestApp into t/lib
 
-0.0.1   2014-01-30 17:00:00 America/Chicago
+0.0.1     2014-01-30 17:00:00-06:00 America/Chicago
     - Initial Implementation
     - Supports legacy_get, legacy_post, legacy_put, and legacy_delete
     - Supports Logging
