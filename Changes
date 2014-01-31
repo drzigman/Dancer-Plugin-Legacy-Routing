@@ -1,7 +1,7 @@
 {{$NEXT}}
     - Moved TestApp into t/lib
 
-v0.0.1
+0.0.1   2014-01-30 17:00:00 America/Chicago
     - Initial Implementation
     - Supports legacy_get, legacy_post, legacy_put, and legacy_delete
     - Supports Logging
