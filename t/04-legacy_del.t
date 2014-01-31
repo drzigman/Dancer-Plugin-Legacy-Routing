@@ -6,8 +6,7 @@ use warnings;
 use Data::Dumper;
 use Test::Most;
 
-use FindBin;
-require "$FindBin::Bin/../bin/TestDancerPluginLegacyRouting.pm";
+use t::lib::TestApp;
 
 use Dancer::Test;
 use Dancer::Config;

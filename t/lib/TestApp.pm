@@ -1,4 +1,4 @@
-package TestDancerPluginLegacyRouting;
+package TestApp;
 
 use strict;
 use warnings;

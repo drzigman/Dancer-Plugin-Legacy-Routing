@@ -3,4 +3,4 @@
 *.bak
 Dancer-Plugin-Legacy*
 .build*
-logs/*
+t/lib/logs/*
