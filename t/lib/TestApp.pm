@@ -141,4 +141,14 @@ sub test_del_with_params {
       . $var2;
 }
 
+legacy_any "/legacy/any/get"    => \&test_any;
+legacy_any "/legacy/any/post"   => \&test_any;
+legacy_any "/legacy/any/put"    => \&test_any;
+legacy_any "/legacy/any/delete" => \&test_any;
+
+sub test_any {
+    status 200;
+    return "Testing Any";
+}
+
 1;

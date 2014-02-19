@@ -80,7 +80,7 @@ environment's configuration file.
 
 =head1 METHODS
 
-The standard HTTP methods are available for you to legacy-ify.
+The standard HTTP methods are available for you to legacy-ify, including any.
 
 =head2 legacy_get
 
@@ -188,6 +188,27 @@ register legacy_del => sub {
     };
 
     del $pattern, $hooked_code;
+};
+
+=head2 legacy_any
+
+    any "/good/any"          => \&test_any;
+    legacy_any "/legacy/any" => \&test_any;
+
+=cut
+
+register legacy_any => sub {
+    my $pattern = shift;
+    my $code    = shift;
+
+    my $conf = plugin_setting();
+
+    my $hooked_code = sub {
+        $conf->{log} and _log_request();
+        &$code();
+    };
+
+    any $pattern, $hooked_code;
 };
 
 sub _log_request {
